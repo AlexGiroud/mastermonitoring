@@ -3,7 +3,12 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 const uuidV4 = require('uuid/v4');
 var iothub = require('azure-iothub');
-var connectionString = 'HostName=agirIotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=3qWj7VSCbBDSZqJU4uiNz1xCcJL3kFaqtXxQeTq/uYQ=';
+//CONFIG
+var fs = require('fs');
+var ini = require('ini');
+var config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
+//
+var connectionString = config.connectionString;
 
 var registry = iothub.Registry.fromConnectionString(connectionString);
 var client = iothub.Client.fromConnectionString(connectionString);
